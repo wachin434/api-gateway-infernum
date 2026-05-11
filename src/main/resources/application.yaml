@@ -1,0 +1,43 @@
+spring:
+    application:
+        name: gateway
+    cloud:
+        gateway:
+            server:
+                webmvc:
+                    routes:
+                        - id: auth-service
+                          uri: https://anti-infernum-auth-service.onrender.com
+                          predicates:
+                              - Path=/api/auth/**
+                          filters:
+                              - name: StripPrefix
+                                args:
+                                    parts: 2
+
+                        - id: alert-service
+                          uri: https://anti-infernum-alert-service.onrender.com
+                          predicates:
+                              - Path=/api/alert/**
+                          filters:
+                              - name: StripPrefix
+                                args:
+                                    parts: 2
+
+                        - id: geo-service
+                          uri: https://anti-infernum-geo-service.onrender.com
+                          predicates:
+                              - Path=/api/geo/**
+                          filters:
+                              - name: StripPrefix
+                                args:
+                                    parts: 2
+
+                        - id: report-service
+                          uri: https://anti-infernum-report-service.onrender.com
+                          predicates:
+                              - Path=/api/report/**
+                          filters:
+                              - name: StripPrefix
+                                args:
+                                    parts: 2
